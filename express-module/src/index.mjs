@@ -7,7 +7,7 @@
  * All Rights Reserved.
  */
 
-import { App } from './app.mjs';
+import { Application } from './application.mjs';
 import { config } from "../config.mjs";
 
-new App(config).run();
+new Application(config).run();
