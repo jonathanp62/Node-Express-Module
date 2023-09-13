@@ -9,6 +9,8 @@
 
 import { config } from '../config.mjs';
 
+import expressPackage from 'express';
+
 /**
  * The express module class.
  */
@@ -26,7 +28,24 @@ class ExpressModule {
      * The run method.
      */
     run() {
-        console.log(this._config);
+        const express = expressPackage;
+        const app = express();
+
+        app.get("/", (request, response) => {
+            response.send(this._config.htmlContent.root);
+        });
+
+        app.get("/about", (request, response) => {
+            response.send(this._config.htmlContent.about);
+        });
+
+        app.get("/stop", (request, response) => {
+            server.close();
+        });
+
+        const server = app.listen((this._config.port), () => {
+            console.log(`Listening on the port ${this._config.port}...`);
+        });
     }
 }
 
